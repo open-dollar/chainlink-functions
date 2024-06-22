@@ -41,8 +41,6 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
    */
   function sendRequest(
     string calldata source,
-    FunctionsRequest.Location secretsLocation,
-    bytes calldata encryptedSecretsReference,
     string[] calldata args,
     bytes[] calldata bytesArgs,
     uint64 subscriptionId,
@@ -50,8 +48,6 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
   ) external onlyOwner {
     FunctionsRequest.Request memory req;
     req.initializeRequest(FunctionsRequest.Location.Inline, FunctionsRequest.CodeLanguage.JavaScript, source);
-    req.secretsLocation = secretsLocation;
-    req.encryptedSecretsReference = encryptedSecretsReference;
     if (args.length > 0) {
       req.setArgs(args);
     }
